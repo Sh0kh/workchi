@@ -84,39 +84,57 @@ export default function User() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {users.length > 0 ? (
                     users.map((user, index) => (
-                        <Card
-                            key={user.id}
-                            className="shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-down"
-                            style={{ animationDelay: `${index * 0.1}s` }}
-                        >
-                            <CardBody>
-                                <Typography variant="h5" color="blue-gray" className="mb-2">
-                                    {user.fullName || user.username}
-                                </Typography>
-                                <Typography className="text-sm text-gray-600">
-                                    📱 Tel: {user.phoneNumber || user.user_phone_number}
-                                </Typography>
-                                <Typography className="text-sm text-gray-600">
-                                    📍 Manzil: {user.region || user.fullAddress}
-                                </Typography>
-                                {user.language && (
-                                    <Typography className="text-sm text-gray-600">
-                                        🗣️ Til: {user.language.toUpperCase()}
-                                    </Typography>
-                                )}
-                                <Typography className="text-sm text-gray-600">
-                                    👤 Turi: {userType === "worker" ? "Ishchi" : "Mijoz"}
-                                </Typography>
-                                <Typography className="text-sm text-gray-600">
-                                    📅 Yar.t.: {new Date(...user.createdAt).toLocaleString("uz-UZ")}
-                                </Typography>
+                    <Card
+    key={user.id}
+    className="shadow-xl transition-all duration-300 hover:scale-[1.02] animate-fade-down"
+    style={{ animationDelay: `${index * 0.1}s` }}
+>
+    <CardBody>
+        <Typography variant="h5" color="blue-gray" className="mb-2">
+            {user.fullName || user.username}
+        </Typography>
 
-                                <div className="mt-4 flex gap-2">
-                                    <EditUser userType={userType} user={user} refresh={getAllUser} />
-                                    <DeleteUser userType={userType} userId={user?.id} refresh={getAllUser} />
-                                </div>
-                            </CardBody>
-                        </Card>
+        <Typography className="text-sm text-gray-600">
+            📱 Tel: {user.phoneNumber || user.user_phone_number}
+        </Typography>
+
+        <Typography className="text-sm text-gray-600">
+            📍 Viloyat: {user.region || user.fullAddress}
+        </Typography>
+
+        {user.workCities && user.workCities.length > 0 && (
+            <Typography className="text-sm text-gray-600">
+                🏙️ Ish joylari: {user.workCities.join(", ")}
+            </Typography>
+        )}
+
+        <Typography className="text-sm text-gray-600">
+            💰 Balans: {user.balance?.toLocaleString()} so'm
+        </Typography>
+
+        <Typography className="text-sm text-gray-600">
+            👥 Ishchilar soni: {user.workerCount}
+        </Typography>
+
+        <Typography className="text-sm text-gray-600">
+            🆔 Telegram ID: {user.telegramId}
+        </Typography>
+
+        <Typography className="text-sm text-gray-600">
+            👤 Turi: {userType === "worker" ? "Ishchi" : "Mijoz"}
+        </Typography>
+
+        <Typography className="text-sm text-gray-600">
+            📅 Yar.t.: {new Date(...user.createdAt).toLocaleString("uz-UZ")}
+        </Typography>
+
+        <div className="mt-4 flex gap-2">
+            <EditUser userType={userType} user={user} refresh={getAllUser} />
+            <DeleteUser userType={userType} userId={user?.id} refresh={getAllUser} />
+        </div>
+    </CardBody>
+</Card>
+
                     ))
                 ) : (
                     <Typography color="gray" className="col-span-full text-center">
