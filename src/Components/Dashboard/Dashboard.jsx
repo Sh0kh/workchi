@@ -41,7 +41,7 @@ export default function OrderList() {
           break;
         case "all":
         default:
-          url = "/order/api/getAll";
+          url = "/order/api/getAllOrders";
           break;
       }
 
