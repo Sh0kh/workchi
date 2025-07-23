@@ -36,9 +36,6 @@ export default function OrderList() {
     setLoading(true);
     try {
       const response = await axios.get(`/order/api/getAll`, {
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-        },
         params: {
           page,
           size,
@@ -63,9 +60,6 @@ export default function OrderList() {
     setLoading(true);
     try {
       const response = await axios.get(`/order/api/getProgressOrders`, {
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-        },
         params: {
           page,
           size,

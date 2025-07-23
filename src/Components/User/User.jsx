@@ -25,11 +25,7 @@ export default function User() {
     const getAllUser = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`/${userType}/getAll?page=${page}&size=${size}`, {
-                headers: {
-                    "ngrok-skip-browser-warning": "true",
-                },
-            });
+            const response = await axios.get(`/${userType}/getAll?page=${page}&size=${size}`);
 
             const data = response.data;
             setUsers(Array.isArray(data.content) ? data.content : []);
