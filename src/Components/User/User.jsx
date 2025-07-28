@@ -26,7 +26,6 @@ export default function User() {
         setLoading(true);
         try {
             const response = await axios.get(`/${userType}/getAll?page=${page}&size=${size}`);
-
             const data = response.data;
             setUsers(Array.isArray(data.content) ? data.content : []);
             setTotalPages(data.totalPages || 0);
@@ -53,12 +52,7 @@ export default function User() {
     if (loading) {
         return (
             <div className="min-h-screen p-4 flex items-center justify-center">
-                <ReactLoading
-                    type="spinningBubbles"
-                    color="black"
-                    height={100}
-                    width={100}
-                />
+                <ReactLoading type="spinningBubbles" color="black" height={100} width={100} />
             </div>
         );
     }
@@ -94,38 +88,33 @@ export default function User() {
                                     {user.fullName || user.username}
                                 </Typography>
 
+                                <Typography className="text-sm text-gray-600">🆔 ID: {user.id}</Typography>
+                                <Typography className="text-sm text-gray-600">🆔 Telegram ID: {user.telegramId}</Typography>
+                                <Typography className="text-sm text-gray-600">📱 Tel: {user.phoneNumber || user.user_phone_number}</Typography>
+                                <Typography className="text-sm text-gray-600">📍 Viloyat: {user.region || user.fullAddress}</Typography>
+                                <Typography className="text-sm text-gray-600">🌐 Region ID: {user.regionId}</Typography>
                                 <Typography className="text-sm text-gray-600">
-                                    📱 Tel: {user.phoneNumber || user.user_phone_number}
+                                    🏙️ Ish joylari: {user.workCities?.join(", ") || "Yo'q"}
                                 </Typography>
-
+                      
                                 <Typography className="text-sm text-gray-600">
-                                    📍 Viloyat: {user.region || user.fullAddress}
+                                    🛠️ Xizmatlar: {user.services_category?.join(", ") || "Yo'q"}
                                 </Typography>
-
-                                {user.workCities && user.workCities.length > 0 && (
-                                    <Typography className="text-sm text-gray-600">
-                                        🏙️ Ish joylari: {user.workCities.join(", ")}
-                                    </Typography>
-                                )}
-
                                 <Typography className="text-sm text-gray-600">
-                                    💰 Balans: {user.balance?.toLocaleString()} so'm
+                                    💰 Balans: {user.balance?.toLocaleString("uz-UZ")} so'm
                                 </Typography>
-
                                 <Typography className="text-sm text-gray-600">
                                     👥 Ishchilar soni: {user.workerCount}
                                 </Typography>
-
-                                <Typography className="text-sm text-gray-600">
-                                    🆔 Telegram ID: {user.telegramId}
-                                </Typography>
-
                                 <Typography className="text-sm text-gray-600">
                                     👤 Turi: {userType === "worker" ? "Ishchi" : "Mijoz"}
                                 </Typography>
-
                                 <Typography className="text-sm text-gray-600">
-                                    📅 Yar.t.: {new Date(...user.createdAt).toLocaleString("uz-UZ")}
+                                    📅 Yar.t.: {
+                                        Array.isArray(user.createdAt)
+                                            ? new Date(...user.createdAt).toLocaleString("uz-UZ")
+                                            : "Nomaʼlum sana"
+                                    }
                                 </Typography>
 
                                 <div className="mt-4 flex gap-2">
@@ -134,7 +123,6 @@ export default function User() {
                                 </div>
                             </CardBody>
                         </Card>
-
                     ))
                 ) : (
                     <Typography color="gray" className="col-span-full text-center">
