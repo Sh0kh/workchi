@@ -3,6 +3,7 @@ import { Card, CardBody, Typography, Button } from "@material-tailwind/react";
 import OrderEdit from "./components/OrderEdit";
 import axios from "../../utils/axios";
 import ReactLoading from "react-loading";
+import OrderDelete from "./components/OrderDelete";
 
 export default function OrderList() {
   const [data, setData] = useState([]);
@@ -128,7 +129,10 @@ export default function OrderList() {
                       <span className="font-semibold">ID:</span> {order.id}
                     </Typography>
                   </div>
-                  <OrderEdit refresh={() => fetchOrders(activeButton)} orderData={order} />
+                  <div className="flex items-center space-x-2">
+                    <OrderEdit refresh={() => fetchOrders(activeButton)} orderData={order} />
+                    <OrderDelete orderId={order.id} refresh={() => fetchOrders(activeButton)} />
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
