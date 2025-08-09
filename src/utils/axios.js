@@ -1,4 +1,4 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'https://f47787a986e8.ngrok-free.app';
+axios.defaults.baseURL = 'https://workchi.uz/';
 
 export default axios;
