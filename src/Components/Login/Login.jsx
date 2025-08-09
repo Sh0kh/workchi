@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Swal from 'sweetalert2';
+import axios from 'axios';
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -15,19 +16,39 @@ export default function Login() {
     setShowPassword((prev) => !prev);
   };
 
-  const handleLogin = () => {
-    if (username === '+998903236887B' && password === 'Qwertasdf9') {
-      Swal.fire({
-        title: 'Xush kelibsiz!',
-        icon: 'success',
-        timer: 2000,
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-      });
-      navigate('/');
-      localStorage.setItem('isAuthenticated', 'true');
-    } else {
+  const handleLogin = async () => {
+    try {
+      const Data = {
+        username: username,
+        password: password
+      }
+      const response = await axios.post(`api/v1/auth/login`, Data)
+      if (response?.data?.code === 200) {
+        Swal.fire({
+          title: 'Xush kelibsiz!',
+          icon: 'success',
+          timer: 2000,
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+        });
+        localStorage.setItem(`token`, response?.data?.accessToken)
+        localStorage.setItem('isAuthenticated', true)
+        setUsername('')
+        setPassword('')
+        navigate('/')
+      } else {
+        Swal.fire({
+          title: 'Xato!',
+          text: 'Login yoki parol noto‘g‘ri',
+          icon: 'error',
+          timer: 3000,
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+        });
+      }
+    } catch (error) {
       Swal.fire({
         title: 'Xato!',
         text: 'Login yoki parol noto‘g‘ri',

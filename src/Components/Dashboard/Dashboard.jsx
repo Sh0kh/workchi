@@ -8,7 +8,7 @@ import OrderDelete from "./components/OrderDelete";
 export default function OrderList() {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeButton, setActiveButton] = useState("all");
+  const [activeButton, setActiveButton] = useState("not_started");
   const [size] = useState(20);
 
   const formatDateTimeFromArray = (dateArray) => {
@@ -21,35 +21,37 @@ export default function OrderList() {
         .padStart(2, "0")}:${second.toString().padStart(2, "0")}`;
   };
 
+  console.log(activeButton)
+
   const fetchOrders = async (type) => {
     setLoading(true);
     setActiveButton(type);
+
     try {
-      let url = "";
+      let url = "/order/api/getAll";
       let params = { page: 0, size };
 
       switch (type) {
-        case "unconfirmed":
-          url = "/order/api/getAll";
-          params = { ...params, isActive: false, isClosed: false };
+        case "not_started":
+          params.status = "NOT_STARTED";
           break;
-        case "closed":
-          url = "/order/api/getAll";
-          params = { ...params, isActive: true, isClosed: true };
+        case "in_progress":
+          params.status = "IN_PROGRESS";
           break;
-        case "progress":
-          url = "/order/api/getProgressOrders";
+        case "completed":
+          params.status = "COMPLETED";
           break;
-        case "all":
+        case "a":
         default:
-          url = "/order/api/getAllOrders";
+          // Для всех не добавляем статус
           break;
       }
 
       const response = await axios.get(url, {
         params,
         headers: {
-          'ngrok-skip-browser-warning': 'true',
+          "Authorization": `Bearer ${localStorage.getItem("token")}`,
+          "ngrok-skip-browser-warning": "true",
         },
       });
 
@@ -61,8 +63,10 @@ export default function OrderList() {
     }
   };
 
+
+
   useEffect(() => {
-    fetchOrders("all");
+    fetchOrders("not_started");
   }, []);
 
   if (loading) {
@@ -84,31 +88,25 @@ export default function OrderList() {
         Buyurtmalar Ro'yxati
       </h1>
 
-      {/* Simple Filter Buttons */}
+      {/* Updated Filter Buttons */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         <Button
-          onClick={() => fetchOrders("all")}
-          className={`rounded-md ${activeButton === "all" ? "bg-blue-600" : "bg-gray-400"}`}
+          onClick={() => fetchOrders("not_started")}
+          className={`rounded-md ${activeButton === "not_started" ? "bg-blue-600" : "bg-gray-400"}`}
         >
-          Hammasi
+          Boshlanmagan
         </Button>
         <Button
-          onClick={() => fetchOrders("unconfirmed")}
-          className={`rounded-md ${activeButton === "unconfirmed" ? "bg-blue-600" : "bg-gray-400"}`}
-        >
-          Tasdiqlanmagan
-        </Button>
-        <Button
-          onClick={() => fetchOrders("closed")}
-          className={`rounded-md ${activeButton === "closed" ? "bg-blue-600" : "bg-gray-400"}`}
-        >
-          Yopilgan
-        </Button>
-        <Button
-          onClick={() => fetchOrders("progress")}
-          className={`rounded-md ${activeButton === "progress" ? "bg-blue-600" : "bg-gray-400"}`}
+          onClick={() => fetchOrders("in_progress")}
+          className={`rounded-md ${activeButton === "in_progress" ? "bg-blue-600" : "bg-gray-400"}`}
         >
           Jarayondagi
+        </Button>
+        <Button
+          onClick={() => fetchOrders("completed")}
+          className={`rounded-md ${activeButton === "completed" ? "bg-blue-600" : "bg-gray-400"}`}
+        >
+          Tugallangan
         </Button>
       </div>
 
