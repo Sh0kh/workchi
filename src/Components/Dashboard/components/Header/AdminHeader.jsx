@@ -1,69 +1,58 @@
-import React, { useState, useRef, useEffect } from "react";
-import { LogOut, User, ChevronDown } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import { ShoppingCart, Users } from 'lucide-react';
+import Logo from '../../../../images/photo_2025-08-11_07-51-02-removebg-preview.png';
 
-export default function AdminHeader({ active, children }) {
-    const navigate = useNavigate();
-    const [openMenu, setOpenMenu] = useState(false);
-    const menuRef = useRef(null);
-
-    const handleLogout = () => {
-        localStorage.clear();
-        navigate("/login");
-    };
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setOpenMenu(false);
-            }
-        };
-        document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
-
+export default function AdminHeader() {
     return (
-        <div className="fixed w-[99%] mx-[5px] p-6  z-30 top-[10px] flex justify-between items-center mb-6  py-4 
-            bg-white/30 backdrop-blur-md rounded-2xl border border-white/30 shadow-lg">
-            <div>
-                <button
-                    onClick={active}
-                    className="text-[25px] flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24">
-                        <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.3} d="M3 6.001h18m-18 6h18m-18 6h18"></path>
-                    </svg>
-                </button>
-            </div>
-
-            {/* <div className="relative flex items-center gap-4" ref={menuRef}>
-                <button
-                    onClick={() => setOpenMenu(!openMenu)}
-                    className="flex items-center gap-2 bg-white/20 hover:bg-white/40 text-gray-800 px-4 py-2 rounded-full border border-white/30 shadow transition text-sm font-medium"
-                >
-                    <User className="w-5 h-5" />
-                    <ChevronDown className="w-4 h-4" />
-                </button>
-
-                {openMenu && (
-                    <div className="absolute right-0 top-14 w-40 bg-white/90 backdrop-blur-lg border border-white/30 shadow-lg rounded-lg py-2 z-50">
-                        <button
-                            onClick={() => navigate("/profil")}
-                            className="w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100 transition"
-                        >
-                            Profil
-                        </button>
-                        <button
-                            onClick={handleLogout}
-                            className="w-full px-4 py-2 text-left text-sm text-red-600 hover:bg-red-50 transition"
-                        >
-                            Chiqish
-                        </button>
+        <header className=" py-4">
+            <div className="Container">
+                <div className="flex items-center justify-between">
+                    {/* Логотип */}
+                    <div className="Logo flex items-center gap-3">
+                        <img className="w-[100px]" src={Logo} alt="Logo" />
                     </div>
-                )}
-                {children}
-            </div> */}
-        </div>
+
+                    {/* Навигация */}
+                    <nav className="flex items-center gap-[40px] text-lg font-medium">
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) =>
+                                `relative flex items-center gap-2 px-2 pb-1 transition-all duration-500 ease-in-out 
+                                 hover:text-MainColor 
+                                 ${isActive ? 'text-MainColor' : 'text-gray-700'}`
+                            }
+                        >
+                            <ShoppingCart size={20} />
+                            Buyurtmalar
+                            {/* Анимированный border */}
+                            <span
+                                className={({ isActive }) =>
+                                    `absolute bottom-0 left-0 h-[2px] bg-MainColor transition-all duration-500 ease-in-out
+                                    ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`
+                                }
+                            ></span>
+                        </NavLink>
+
+                        <NavLink
+                            to="/user"
+                            className={({ isActive }) =>
+                                `relative flex items-center gap-2 px-2 pb-1 transition-all duration-500 ease-in-out 
+                                 hover:text-MainColor 
+                                 ${isActive ? 'text-MainColor' : 'text-gray-700'}`
+                            }
+                        >
+                            <Users size={20} />
+                            Foydalanuvchilar
+                            <span
+                                className={({ isActive }) =>
+                                    `absolute bottom-0 left-0 h-[2px] bg-MainColor transition-all duration-500 ease-in-out
+                                    ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`
+                                }
+                            ></span>
+                        </NavLink>
+                    </nav>
+                </div>
+            </div>
+        </header>
     );
 }

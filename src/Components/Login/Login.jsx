@@ -5,6 +5,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import Logo from '../../images/photo_2025-08-11_07-51-02-removebg-preview.png'
 
 export default function Login() {
   const [username, setUsername] = useState('');
@@ -70,7 +71,9 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA] px-4">
       <div className="w-full max-w-sm bg-white rounded-xl p-6 shadow-md">
-        <h2 className="text-center text-2xl font-bold text-black mb-6">Kirish</h2>
+        <div className='flex items-center justify-center'>
+          <img className='w-[200px]' src={Logo} alt="Foto" />
+        </div>
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -115,7 +118,7 @@ export default function Login() {
           </div>
           <Button
             onClick={handleLogin}
-            className="w-full bg-black text-white font-semibold py-2 rounded hover:bg-gray-800"
+            className="w-full bg-MainColor text-white font-semibold py-2 rounded hover:bg-gray-800"
           >
             Kirish
           </Button>

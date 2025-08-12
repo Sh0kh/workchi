@@ -21,7 +21,7 @@ export default function AdminLayout() {
     }, [isAuthenticated])
 
     return (
-        <div className="flex w-[100%] overflow-hidden  bg-[#FAFAFA] relative">
+        <div className="flex w-[100%] overflow-hidden  bg-[#F2F2F2] relative">
             <Sidebar active={active} onclose={() => setActive(false)} />
             <div className="mt-[10px] w-full min-h-screen">
                 <AdminHeader active={() => setActive(!active)} />
