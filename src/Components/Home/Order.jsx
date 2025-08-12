@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Button } from "@material-tailwind/react";
-import NotStartedOrders from "./components/NotStartedOrders";
-import InProgressOrders from "./components/InProgressOrders";
-import CompletedOrders from "./components/CompletedOrders";
+import NotStartedOrders from "./Components/NotStartedOrders";
+import InProgressOrders from "./Components/InProgressOrders";
+import CompletedOrders from "./Components/CompletedOrders";
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState("not_started");
