@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://workchi.uz/';
+axios.defaults.baseURL = 'https://601b03a43818.ngrok-free.app';
 
 // Перехватчик ответа
 axios.interceptors.response.use(
