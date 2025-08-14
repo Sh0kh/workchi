@@ -283,11 +283,14 @@ export default function Worker() {
                                         <span className="font-semibold text-gray-600">Telefon:</span>
                                         <span className="font-medium">{item?.phoneNumber}</span>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <FaMapMarkerAlt className="text-red-500" />
+                                    <div className="flex items-start gap-2">
+                                        <FaMapMarkerAlt className="text-red-500 mt-1" />
                                         <span className="font-semibold text-gray-600">Hudud:</span>
-                                        <span className="font-medium">{item?.regionAndCityAddress}</span>
+                                        <span className="font-medium">
+                                            {item?.workCities?.join(", ")}
+                                        </span>
                                     </div>
+
                                     <div className="flex items-center gap-2">
                                         <FaHome className="text-orange-500" />
                                         <span className="font-semibold text-gray-600">Uy manzili:</span>
