@@ -27,6 +27,17 @@ export default function Worker() {
 
     const size = 10;
 
+    const categoryTranslations = {
+        cleaning: "Tozalash",
+        laundry: "Kir yuvish",
+        furniture: "Mebel",
+        plumbing: "Santexnika",
+        electrical: "Elektr ishlari",
+        tiling: "Kafel/Plitka",
+        hourly_workers: "Soatbay ishchilar",
+        other_service: "Boshqa xizmat"
+    };
+
     // Get region name by ID
     const getRegionName = (id) => {
         const region = Regions.find(r => r.id.toString() === id);
@@ -288,6 +299,15 @@ export default function Worker() {
                                         <span className="font-semibold text-gray-600">Hudud:</span>
                                         <span className="font-medium">
                                             {item?.workCities?.join(", ")}
+                                        </span>
+                                    </div>
+                                    <div className="flex items-start gap-2">
+                                        <FaUser className="text-red-500 mt-1" />
+                                        <span className="font-semibold text-gray-600">Ishchini ishi:</span>
+                                        <span className="font-medium">
+                                            {item?.services_category
+                                                ?.map((cat) => categoryTranslations[cat] || cat) // переводим если есть
+                                                .join(", ")}
                                         </span>
                                     </div>
 

@@ -358,7 +358,7 @@ export default function NotStartedOrders() {
                                             Boshlangan vaqti:
                                         </span>
                                         <span className="block px-[5px] text-[15px] py-[8px] bg-MainColor rounded-[8px] text-white font-medium">
-                                            {formatDateTime(item?.createAt)}
+                                            {formatDateTime(item?.date)}
                                         </span>
                                     </div>
                                 </div>
