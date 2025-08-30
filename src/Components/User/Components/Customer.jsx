@@ -11,6 +11,7 @@ import districts from '../../Data/districts.json'
 
 import { FaUser, FaTelegramPlane, FaPhone, FaMapMarkerAlt, FaHome, FaCalendarAlt, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import axios from "axios";
+import DeleteUser from "./DeleteUser";
 
 export default function Customer() {
     const [users, setUsers] = useState([]);
@@ -245,9 +246,12 @@ export default function Customer() {
                             key={index}
                             className="shadow-lg border w-full border-gray-200 bg-white p-6 rounded-xl hover:shadow-xl transition-shadow duration-200"
                         >
-                            <h2 className="text-xl font-bold flex items-center gap-2 mb-4 text-gray-800">
-                                <FaUser className="text-MainColor" /> Foydalanuvchi ma'lumotlari
-                            </h2>
+                            <div className="flex items-center justify-between">
+                                <h2 className="text-xl font-bold flex items-center gap-2 mb-4 text-gray-800">
+                                    <FaUser className="text-MainColor" /> Foydalanuvchi ma'lumotlari
+                                </h2>
+                                <DeleteUser userId={item?.id} refresh={getAllUser} userType={`customer`} />
+                            </div>
 
                             <div className="flex flex-col gap-3 text-gray-800">
                                 <div className="flex items-center gap-2">

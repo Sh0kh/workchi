@@ -18,7 +18,12 @@ export default function DeleteUser({ userId, refresh, userType }) {
 
     const handleConfirmDelete = async () => {
         try {
-            const response = await axios.delete(`/${userType}/delete?id=${userId}`)
+            const response = await axios.delete(`/${userType}/delete?id=${userId}`,{
+                headers:{
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                    "ngrok-skip-browser-warning": "true",
+                }
+            })
             Swal.fire({
                 title: "Muvaffaqiyatli!",
                 icon: "success",
