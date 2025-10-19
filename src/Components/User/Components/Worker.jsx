@@ -12,6 +12,7 @@ import districts from '../../Data/districts.json'
 
 import { FaUser, FaTelegramPlane, FaPhone, FaMapMarkerAlt, FaHome, FaCalendarAlt, FaUserTie, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import DeleteUser from "./DeleteUser";
+import { DollarSign } from "lucide-react";
 
 export default function Worker() {
     const [users, setUsers] = useState([]);
@@ -319,6 +320,13 @@ export default function Worker() {
                                         <FaHome className="text-orange-500" />
                                         <span className="font-semibold text-gray-600">Uy manzili:</span>
                                         <span className="font-medium">{item?.homeAddress}</span>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <DollarSign className="text-green-500" />
+                                        <span className="font-semibold text-gray-600">Balans:</span>
+                                        <span className="font-medium">
+                                            {item?.balance?.toLocaleString("ru-RU")} so‘m
+                                        </span>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <FaCalendarAlt className="text-purple-500" />
