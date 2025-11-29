@@ -75,19 +75,18 @@ export default function InProgressOrders() {
   const fetchInProgressOrders = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("/order/api/getAll", {
+      const response = await axios.get("/order/getAll", {
         params: {
+          status: "IN_PROGRESS",
           page: 0,
-          size,
-          status: "IN_PROGRESS"
+          size
         },
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          "ngrok-skip-browser-warning": "true",
         },
       });
 
-      setData(response.data.content || []);
+      setData(response.data.data?.orders || []);
     } catch (error) {
       console.log(error);
       if (error?.code === 401) {
@@ -128,15 +127,14 @@ export default function InProgressOrders() {
         params.category = selectedCategory;
       }
 
-      const response = await axios.get("/order/api/getFilter", {
+      const response = await axios.get("/order/getFilter", {
         params,
         headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`,
-          "ngrok-skip-browser-warning": "true",
         },
       });
 
-      setData(response.data || []);
+      setData(response?.data?.data || []);
     } catch (error) {
       console.log("Filterlashda xatolik:", error);
       if (error?.code === 401) {
@@ -336,7 +334,7 @@ export default function InProgressOrders() {
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-4 mt-[20px] pb-[50px]">
-          {data.map((item, index) => (
+          {data?.map((item, index) => (
             <Card
               key={index}
               className="shadow-lg border border-gray-200 bg-white p-4 hover:shadow-xl transition-shadow duration-200"

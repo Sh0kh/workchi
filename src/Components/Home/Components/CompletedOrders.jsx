@@ -75,19 +75,18 @@ export default function CompletedOrders() {
     const fetchCompletedOrders = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("/order/api/getAll", {
+            const response = await axios.get("/order/getAll", {
                 params: {
+                    status: "COMPLETED",
                     page: 0,
                     size,
-                    status: "COMPLETED"
                 },
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
 
-            setData(response.data.content || []);
+            setData(response.data.data?.orders || []);
         } catch (error) {
             console.log(error);
             if (error?.code === 401) {
@@ -128,15 +127,14 @@ export default function CompletedOrders() {
                 params.category = selectedCategory;
             }
 
-            const response = await axios.get("/order/api/getFilter", {
+            const response = await axios.get("/order/getFilter", {
                 params,
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
 
-            setData(response.data || []);
+            setData(response.data?.data || []);
         } catch (error) {
             console.log("Filterlashda xatolik:", error);
             if (error?.code === 401) {

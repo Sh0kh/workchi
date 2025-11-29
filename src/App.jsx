@@ -8,6 +8,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import User from "./Components/User/User";
 import Home from "./Components/Home/Order";
 import OrderInfo from "./Components/OrderInfo.jsx/NS_OrderInfo";
+import AppLication from "./Components/App/AppLication";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route index element={<Home />} />
             <Route path="/ns/order/:orderID" element={<OrderInfo />} />
             <Route path="/user" element={<User />} />
+            <Route path="/app" element={<AppLication />} />
           </Route>
           <Route element={<MainLayout />}>
 

@@ -35,10 +35,9 @@ export default function Customer() {
             const response = await axios.get(`/customer/getAll?page=${page}&size=${size}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
-            const data = response.data;
+            const data = response.data?.data;
             setUsers(Array.isArray(data.content) ? data.content : []);
             setTotalPages(data.totalPages || 0);
         } catch (error) {
@@ -69,10 +68,9 @@ export default function Customer() {
             const response = await axios.get(`/customer/getFilter?${queryParams}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
-            const data = response.data;
+            const data = response.data?.data;
             setUsers(Array.isArray(data) ? data : []);
             setTotalPages(data.totalPages || 0);
         } catch (error) {

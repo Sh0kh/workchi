@@ -58,11 +58,10 @@ export default function Worker() {
             const response = await axios.get(`/worker/getAll?page=${page}&size=${size}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
-            const data = response.data;
-            setUsers(Array.isArray(data.content) ? data.content : []);
+            const data = response.data?.data;
+            setUsers(Array.isArray(data) ? data : []);
             setTotalPages(data.totalPages || 0);
         } catch (error) {
             console.error("Ishchilarni olishda xatolik:", error);
@@ -92,10 +91,9 @@ export default function Worker() {
             const response = await axios.get(`/worker/getFilter?${queryParams}`, {
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
-            const data = response.data;
+            const data = response.data?.data    ;
             setUsers(Array.isArray(data) ? data : []);
             setTotalPages(data.totalPages || 0);
         } catch (error) {

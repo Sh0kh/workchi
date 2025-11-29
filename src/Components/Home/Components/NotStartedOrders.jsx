@@ -82,11 +82,10 @@ export default function NotStartedOrders() {
                 },
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
 
-            setData(response.data.content || []);
+            setData(response.data.data?.orders || []);
         } catch (error) {
             console.log(error);
             if (error?.code === 401) {
@@ -104,7 +103,6 @@ export default function NotStartedOrders() {
             let params = {
                 page: 0,
                 size,
-                status: "NOT_STARTED"
             };
 
             if (phoneFilter.trim()) {
@@ -123,15 +121,14 @@ export default function NotStartedOrders() {
                 params.category = selectedCategory;
             }
 
-            const response = await axios.get("/order/api/getFilter", {
+            const response = await axios.get("/order/getFilter", {
                 params,
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,
-                    "ngrok-skip-browser-warning": "true",
                 },
             });
 
-            setData(response.data || []);
+            setData(response.data?.data || []);
         } catch (error) {
             console.log("Filterlashda xatolik:", error);
             if (error?.code === 401) {

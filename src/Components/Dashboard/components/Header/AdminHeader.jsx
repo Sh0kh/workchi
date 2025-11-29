@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { ShoppingCart, Users } from 'lucide-react';
+import { LayoutGrid, ShoppingCart, Users } from 'lucide-react';
 import Logo from '../../../../images/photo_2025-08-11_07-51-02-removebg-preview.png';
 
 export default function AdminHeader() {
@@ -43,6 +43,23 @@ export default function AdminHeader() {
                         >
                             <Users size={20} />
                             Foydalanuvchilar
+                            <span
+                                className={({ isActive }) =>
+                                    `absolute bottom-0 left-0 h-[2px] bg-MainColor transition-all duration-500 ease-in-out
+                                    ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`
+                                }
+                            ></span>
+                        </NavLink>
+                        <NavLink
+                            to="/app"
+                            className={({ isActive }) =>
+                                `relative flex items-center gap-2 px-2 pb-1 transition-all duration-500 ease-in-out 
+                                 hover:text-MainColor 
+                                 ${isActive ? 'text-MainColor' : 'text-gray-700'}`
+                            }
+                        >
+                            <LayoutGrid size={20} />
+                            Application
                             <span
                                 className={({ isActive }) =>
                                     `absolute bottom-0 left-0 h-[2px] bg-MainColor transition-all duration-500 ease-in-out
