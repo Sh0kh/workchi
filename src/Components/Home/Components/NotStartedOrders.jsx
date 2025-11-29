@@ -11,7 +11,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 export default function NotStartedOrders() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [size] = useState(20);
+    const [size] = useState(10);
     const navigate = useNavigate();
 
     // Filter states
@@ -74,11 +74,11 @@ export default function NotStartedOrders() {
     const fetchNotStartedOrders = async () => {
         setLoading(true);
         try {
-            const response = await axios.get("/order/api/getAll", {
+            const response = await axios.get("/order/getAll", {
                 params: {
+                    status: "NOT_STARTED",
                     page: 0,
                     size,
-                    status: "NOT_STARTED"
                 },
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`,

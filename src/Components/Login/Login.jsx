@@ -24,31 +24,19 @@ export default function Login() {
         password: password
       }
       const response = await axios.post(`api/v1/auth/login`, Data)
-      if (response?.data?.code === 200) {
-        Swal.fire({
-          title: 'Xush kelibsiz!',
-          icon: 'success',
-          timer: 2000,
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-        });
-        localStorage.setItem(`token`, response?.data?.accessToken)
-        localStorage.setItem('isAuthenticated', true)
-        setUsername('')
-        setPassword('')
-        navigate('/')
-      } else {
-        Swal.fire({
-          title: 'Xato!',
-          text: 'Login yoki parol noto‘g‘ri',
-          icon: 'error',
-          timer: 3000,
-          toast: true,
-          position: 'top-end',
-          showConfirmButton: false,
-        });
-      }
+      Swal.fire({
+        title: 'Xush kelibsiz!',
+        icon: 'success',
+        timer: 2000,
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+      });
+      localStorage.setItem(`token`, response?.data?.data?.token)
+      localStorage.setItem('isAuthenticated', true)
+      setUsername('')
+      setPassword('')
+      navigate('/')
     } catch (error) {
       Swal.fire({
         title: 'Xato!',
