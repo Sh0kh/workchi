@@ -20,7 +20,7 @@ export default function OrderDelete({ orderId }) {
 
     const handleDelete = async () => {
         try {
-            const response = await axios.delete(`/order/api/delete?id=${orderId}`, {
+            const response = await axios.delete(`/order/delete?id=${orderId}`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }

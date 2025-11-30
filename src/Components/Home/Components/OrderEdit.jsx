@@ -127,7 +127,7 @@ export default function OrderEdit({ orderData }) {
                 status: formData.status
             };
 
-            await axios.put(`/order/api/update`, payload, {
+            await axios.put(`/order/update`, payload, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
